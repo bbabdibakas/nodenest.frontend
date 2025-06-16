@@ -1,6 +1,5 @@
 import {createRoot} from "react-dom/client";
-
-console.log('Hello, World!');
+import './index.scss'
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
