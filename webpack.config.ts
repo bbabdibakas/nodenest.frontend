@@ -53,6 +53,7 @@ export default (env: IEnv) => {
         devtool: isDev ?  'inline-source-map' : undefined,
         devServer: isDev ? {
             port: 3000,
+            historyApiFallback: true
         } : undefined
     }
 
