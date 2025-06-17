@@ -1,5 +1,5 @@
 services:
-  frontend:
+  frontend.dev:
     image: node:22
     container_name: nodenest.frontend.dev
     working_dir: /app
@@ -9,3 +9,14 @@ services:
     ports:
       - "3000:3000"
     tty: true
+    profiles:
+      - dev
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nodenest.frontend
+    ports:
+      - "80:80"
+    restart: "unless-stopped"

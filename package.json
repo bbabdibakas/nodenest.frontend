@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
+    "build:prod": "webpack --env mode=production",
+    "build:dev": "webpack --env mode=development",
     "dev": "webpack serve"
   },
   "keywords": [],
@@ -17,6 +18,7 @@
     "@types/webpack": "^5.28.5",
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.9.2",
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
     "style-loader": "^4.0.0",
