@@ -1,16 +1,9 @@
-import {useState} from "react";
-import {AppInput} from "shared/ui/AppInput/AppInput";
+import {LoginForm} from "features/Login";
 
 const MainPage = () => {
-    const [value, setValue] = useState('')
-
-    const onChangeValue = (value: string) => {
-        setValue(value)
-    }
-
     return (
         <div className="page">
-            <AppInput value={value} onChange={onChangeValue} placeholder={'Username'}/>
+            <LoginForm/>
         </div>
     )
 }
