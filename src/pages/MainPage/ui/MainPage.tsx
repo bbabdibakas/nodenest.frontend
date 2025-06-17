@@ -1,5 +1,5 @@
-import {AppInput} from "../components/AppInput/AppInput";
 import {useState} from "react";
+import {AppInput} from "shared/ui/AppInput/AppInput";
 
 const MainPage = () => {
     const [value, setValue] = useState('')

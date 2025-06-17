@@ -1,6 +1,6 @@
 import {createRoot} from "react-dom/client";
-import './styles/index.scss'
-import App from "./App";
+import 'app/styles/index.scss'
+import App from "app/App";
 import {BrowserRouter} from "react-router";
 
 const rootElement = document.getElementById('root');

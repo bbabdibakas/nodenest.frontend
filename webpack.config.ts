@@ -47,6 +47,13 @@ export default (env: IEnv) => {
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
+            preferAbsolute: true,
+            modules: [
+                path.resolve(__dirname, 'src'),
+                'node_modules'
+            ],
+            mainFiles: ['index'],
+            alias: {},
         },
         plugins: [
             new webpack.ProgressPlugin(),
@@ -58,7 +65,7 @@ export default (env: IEnv) => {
                 chunkFilename: '[id].[contenthash].css',
             })
         ],
-        devtool: isDev ?  'inline-source-map' : undefined,
+        devtool: isDev ? 'inline-source-map' : undefined,
         devServer: isDev ? {
             port: 3000,
             historyApiFallback: true
