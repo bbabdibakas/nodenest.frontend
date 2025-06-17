@@ -5,6 +5,7 @@ interface AppInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'val
     className?: string
     value: string
     placeholder: string
+    hasError?: boolean
     onChange: (value: string) => void
 }
 
@@ -14,6 +15,7 @@ export const AppInput = (props: AppInputProps) => {
         value,
         onChange,
         placeholder,
+        hasError,
         maxLength = 32,
         ...otherProps
     } = props
@@ -25,7 +27,7 @@ export const AppInput = (props: AppInputProps) => {
     return (
         <div className={styles.wrapper}>
             <input
-                className={`${styles.AppInput} ${className}`}
+                className={`${styles.AppInput} ${hasError ? styles.hasError : undefined} ${className}`}
                 value={value}
                 onChange={onChangeValue}
                 placeholder={placeholder}

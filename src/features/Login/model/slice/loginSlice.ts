@@ -1,9 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit"
-import {LoginState} from "../types/LoginState"
+import {LoginState, ValidateLoginFormError} from "../types/LoginState"
 
 const initialState: LoginState = {
-    username: '',
-    password: '',
+    form: {
+        username: '',
+        password: '',
+    },
 }
 
 export const loginSlice = createSlice({
@@ -11,11 +13,14 @@ export const loginSlice = createSlice({
     initialState,
     reducers: {
         setUsername: (state, action: PayloadAction<string>) => {
-            state.username = action.payload
+            state.form.username = action.payload
         },
         setPassword: (state, action: PayloadAction<string>) => {
-            state.password = action.payload
+            state.form.password = action.payload
         },
+        setValidateLoginFormError: (state, action: PayloadAction<ValidateLoginFormError[]>) => {
+            state.validateErrors = action.payload
+        }
     },
 })
 

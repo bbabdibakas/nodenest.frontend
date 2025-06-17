@@ -25,6 +25,14 @@
   outline: none;
   transition: all 0.2s ease;
 
+  &.hasError {
+    border-color: red;
+
+    & + .placeholder {
+      color: red;
+    }
+  }
+
   &::placeholder {
     opacity: 0;
   }
@@ -36,6 +44,14 @@
     & + .placeholder {
       font: var(--font-m);
       color: var(--highlight-color);
+    }
+
+    &.hasError {
+      border-color: red;
+
+      & + .placeholder {
+        color: red;
+      }
     }
   }
 }
