@@ -1,6 +1,6 @@
 .wrapper {
-  min-width: 300px;
   position: relative;
+  width: 100%;
 }
 
 .placeholder {
@@ -17,7 +17,7 @@
   width: 100%;
   box-sizing: border-box;
   background: none;
-  padding: 8px;
+  padding: var(--border-padding);
   border: 1px solid #242424;
   border-radius: 12px;
   color: var(--primary-color);
@@ -35,7 +35,7 @@
 
     & + .placeholder {
       font: var(--font-m);
-      color: var(--primary-color);
+      color: var(--highlight-color);
     }
   }
 }

@@ -1,0 +1,17 @@
+.AppButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--font-l);
+  background: var(--highlight-color);
+  border: 1px solid var(--highlight-color);
+  padding: var(--border-padding);
+  outline: none;
+  border-radius: 12px;
+  color: var(--primary-color);
+
+  &:hover {
+    opacity: 09;
+  }
+}
