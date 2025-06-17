@@ -1,14 +1,11 @@
 import {createRoot} from "react-dom/client";
-import './index.scss'
+import './styles/index.scss'
+import App from "./App";
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
     const root = createRoot(rootElement);
     root.render(
-        <div>
-            <h1>
-                Hello, World!
-            </h1>
-        </div>
+        <App/>
     )
 }

@@ -1,0 +1,23 @@
+@use "reset";
+@use "variables";
+
+body {
+  background: var(--app-bg-color);
+}
+
+.wrapper {
+  background: var(--app-bg-color);
+  color: var(--primary-color);
+  font: var(--font);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 1046px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
