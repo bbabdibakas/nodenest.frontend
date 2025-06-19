@@ -10,5 +10,7 @@ export interface LoginForm {
 
 export interface LoginState {
     form: LoginForm
+    isLoading: boolean
     validateErrors?: ValidateLoginFormError[]
+    serverErrors?: string[]
 }

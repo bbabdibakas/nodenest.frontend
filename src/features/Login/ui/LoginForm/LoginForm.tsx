@@ -5,14 +5,18 @@ import {AppButton} from "shared/ui/AppButton/AppButton";
 import * as styles from "./LoginForm.module.scss";
 import {getLoginForm} from "../../model/selectors/getLoginForm";
 import {getLoginFormValidateErrors} from "../../model/selectors/getLoginFormValidateErrors";
-import {validateLoginForm} from "features/Login/model/services/validateLoginForm";
-import {ValidateLoginFormError} from "features/Login/model/types/LoginState";
+import {ValidateLoginFormError} from "../../model/types/LoginState";
+import {loginByUsername} from "../../model/services/loginByUsername";
+import {getLoginFormServerErrors} from "../../model/selectors/getLoginFormServerErrors";
+import {getLoginFormIsLoading} from "../../model/selectors/getLoginFormIsLoading";
 
 const LoginForm = () => {
     const dispatch = useDispatch();
 
     const form = useSelector(getLoginForm)
     const validateErrors = useSelector(getLoginFormValidateErrors)
+    const serverErrors = useSelector(getLoginFormServerErrors)
+    const isLoading = useSelector(getLoginFormIsLoading)
 
     const onChangeUsername = (value: string) => {
         dispatch(loginActions.setUsername(value));
@@ -23,38 +27,51 @@ const LoginForm = () => {
     }
 
     const onLoginHandler = () => {
-        const errors = validateLoginForm(form);
-        dispatch(loginActions.setValidateLoginFormError(errors));
+        // @ts-expect-error fix later
+        dispatch(loginByUsername())
     }
 
-    return (
-        <div className={styles.LoginForm}>
-            <div className={styles.title}>
-                Nodenest
+    if (isLoading) {
+        return (
+            <div className={styles.LoginForm}>
+                Loading...
             </div>
-            <AppInput
-                value={form.username}
-                placeholder={'Username'}
-                hasError={validateErrors?.includes(ValidateLoginFormError.INCORRECT_USERNAME)}
-                onChange={onChangeUsername}/>
-            <AppInput
-                value={form.password}
-                placeholder={'Password'}
-                hasError={validateErrors?.includes(ValidateLoginFormError.INCORRECT_PASSWORD)}
-                onChange={onChangePassword}/>
-            <AppButton
-                className={styles.button}
-                onClick={onLoginHandler}
-            >
-                Login
-            </AppButton>
-            {validateErrors?.map((error, index) => (
-                <div key={index} className={styles.error}>
-                    {error}
+        )
+    } else {
+        return (
+            <div className={styles.LoginForm}>
+                <div className={styles.title}>
+                    Nodenest
                 </div>
-            ))}
-        </div>
-    )
+                <AppInput
+                    value={form.username}
+                    placeholder={'Username'}
+                    hasError={validateErrors?.includes(ValidateLoginFormError.INCORRECT_USERNAME)}
+                    onChange={onChangeUsername}/>
+                <AppInput
+                    value={form.password}
+                    placeholder={'Password'}
+                    hasError={validateErrors?.includes(ValidateLoginFormError.INCORRECT_PASSWORD)}
+                    onChange={onChangePassword}/>
+                <AppButton
+                    className={styles.button}
+                    onClick={onLoginHandler}
+                >
+                    Login
+                </AppButton>
+                {validateErrors?.map((error, index) => (
+                    <div key={index} className={styles.error}>
+                        {error}
+                    </div>
+                ))}
+                {serverErrors?.map((error, index) => (
+                    <div key={index} className={styles.error}>
+                        {error}
+                    </div>
+                ))}
+            </div>
+        )
+    }
 }
 
 export default LoginForm;

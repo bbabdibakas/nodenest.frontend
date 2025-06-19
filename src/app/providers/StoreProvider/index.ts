@@ -1,8 +1,9 @@
-import {RootState} from "./lib/RootState";
+import {RootState, ThunkConfig} from "./lib/RootState";
 import StoreProvider from "./ui/StoreProvider";
 
 export type {
-    RootState
+    RootState,
+    ThunkConfig
 }
 
 export {
