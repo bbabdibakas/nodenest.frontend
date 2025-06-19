@@ -1,5 +1,5 @@
 import {AppInput} from "shared/ui/AppInput/AppInput";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {loginActions} from "../../model/slice/loginSlice";
 import {AppButton} from "shared/ui/AppButton/AppButton";
 import * as styles from "./LoginForm.module.scss";
@@ -9,9 +9,10 @@ import {ValidateLoginFormError} from "../../model/types/LoginState";
 import {loginByUsername} from "../../model/services/loginByUsername";
 import {getLoginFormServerErrors} from "../../model/selectors/getLoginFormServerErrors";
 import {getLoginFormIsLoading} from "../../model/selectors/getLoginFormIsLoading";
+import {useAppDispatch} from "shared/lib/useAppDispatch/useAppDispatch";
 
 const LoginForm = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const form = useSelector(getLoginForm)
     const validateErrors = useSelector(getLoginFormValidateErrors)
@@ -26,9 +27,11 @@ const LoginForm = () => {
         dispatch(loginActions.setPassword(value));
     }
 
-    const onLoginHandler = () => {
-        // @ts-expect-error fix later
-        dispatch(loginByUsername())
+    const onLoginHandler = async () => {
+        const result = await dispatch(loginByUsername())
+        if (result.meta.requestStatus === "fulfilled") {
+            alert("Login successfully");
+        }
     }
 
     if (isLoading) {
