@@ -1,9 +1,9 @@
-import {Link} from "react-router";
 import {useSelector} from "react-redux";
 import {useAppDispatch} from "shared/lib/useAppDispatch/useAppDispatch";
 import {useEffect} from "react";
-import {getUserIsInited, userActions} from "entities/User";
-import {AppRouter, routePath} from "app/providers/AppRouter";
+import {getUserData, getUserIsInited, userActions} from "entities/User";
+import {AppRouter} from "app/providers/AppRouter";
+import {Sidebar} from "widgets/Sidebar";
 
 const App = () => {
     const dispatch = useAppDispatch()
@@ -13,12 +13,12 @@ const App = () => {
     }, [dispatch])
 
     const isUserInitialized = useSelector(getUserIsInited)
+    const userData = useSelector(getUserData)
 
     return (
         <div className="wrapper">
             <div className="container">
-                <Link to={routePath.main}>main</Link>
-                <Link to={routePath.profile}>profile</Link>
+                {userData && <Sidebar/>}
                 {isUserInitialized && <AppRouter/>}
             </div>
         </div>

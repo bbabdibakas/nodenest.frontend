@@ -1,6 +1,6 @@
 import {RouteProps} from "react-router";
 import {MainPage} from "pages/MainPage";
-import {ProfilePage} from "pages/ProfilePage";
+import {UsersPage} from "pages/UsersPage";
 import {AuthPage} from "pages/AuthPage";
 
 export type AppRoutesProps = RouteProps & {
@@ -9,13 +9,13 @@ export type AppRoutesProps = RouteProps & {
 
 export enum AppRoutes {
     MAIN = 'main',
-    PROFILE = 'profile',
+    USERS = 'users',
     AUTH = 'auth',
 }
 
 export const routePath: Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
-    [AppRoutes.PROFILE]: '/profile/', //:username
+    [AppRoutes.USERS]: '/users/', //:username
     [AppRoutes.AUTH]: '/auth',
 }
 
@@ -25,9 +25,9 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         element: <MainPage/>,
         isRequiredAuth: true
     },
-    [AppRoutes.PROFILE]: {
-        path: routePath.profile,
-        element: <ProfilePage/>,
+    [AppRoutes.USERS]: {
+        path: routePath.users,
+        element: <UsersPage/>,
         isRequiredAuth: true
     },
     [AppRoutes.AUTH]: {

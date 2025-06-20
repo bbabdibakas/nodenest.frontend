@@ -10,9 +10,12 @@ import {loginByUsername} from "../../model/services/loginByUsername";
 import {getLoginFormServerErrors} from "../../model/selectors/getLoginFormServerErrors";
 import {getLoginFormIsLoading} from "../../model/selectors/getLoginFormIsLoading";
 import {useAppDispatch} from "shared/lib/useAppDispatch/useAppDispatch";
+import {routePath} from "app/providers/AppRouter";
+import {useNavigate} from "react-router";
 
 const LoginForm = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const form = useSelector(getLoginForm)
     const validateErrors = useSelector(getLoginFormValidateErrors)
@@ -30,7 +33,7 @@ const LoginForm = () => {
     const onLoginHandler = async () => {
         const result = await dispatch(loginByUsername())
         if (result.meta.requestStatus === "fulfilled") {
-            alert("Login successfully");
+            navigate(routePath.main)
         }
     }
 

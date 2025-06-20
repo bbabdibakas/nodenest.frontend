@@ -19,7 +19,7 @@
   background: none;
   padding: var(--border-padding);
   border: 1px solid #242424;
-  border-radius: 12px;
+  border-radius: var(--border-radius);
   color: var(--primary-color);
   font: inherit;
   outline: none;

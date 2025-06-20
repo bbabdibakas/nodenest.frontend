@@ -1,0 +1,28 @@
+.Sidebar {
+  min-width: 200px;
+  height: 100%;
+  padding: var(--border-padding);
+  border-right: 1px solid var(--border-color);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  padding: var(--border-padding);
+  border-radius: var(--border-radius);
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  transition: transform 0.1s ease;
+
+  &:hover {
+    background: var(--border-color);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}

@@ -8,7 +8,7 @@
   border: 1px solid var(--highlight-color);
   padding: var(--border-padding);
   outline: none;
-  border-radius: 12px;
+  border-radius: var(--border-radius);
   color: var(--primary-color);
 
   &:hover {
