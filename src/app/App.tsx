@@ -1,17 +1,25 @@
-import {Link, Route, Routes} from "react-router";
-import MainPage from "../pages/MainPage/ui/MainPage";
-import ProfilePage from "../pages/ProfilePage/ui/ProfilePage";
+import {Link} from "react-router";
+import {useSelector} from "react-redux";
+import {useAppDispatch} from "shared/lib/useAppDispatch/useAppDispatch";
+import {useEffect} from "react";
+import {getUserIsInited, userActions} from "entities/User";
+import {AppRouter, routePath} from "app/providers/AppRouter";
 
 const App = () => {
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(userActions.initUserData())
+    }, [dispatch])
+
+    const isUserInitialized = useSelector(getUserIsInited)
+
     return (
         <div className="wrapper">
             <div className="container">
-                <Link to={'/'}>main</Link>
-                <Link to={'/profile'}>profile</Link>
-                <Routes>
-                    <Route path={'/'} element={<MainPage/>}/>
-                    <Route path={'/profile'} element={<ProfilePage/>}/>
-                </Routes>
+                <Link to={routePath.main}>main</Link>
+                <Link to={routePath.profile}>profile</Link>
+                {isUserInitialized && <AppRouter/>}
             </div>
         </div>
     )
