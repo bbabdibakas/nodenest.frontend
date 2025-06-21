@@ -1,25 +1,25 @@
 import {useSelector} from "react-redux";
 import {useAppDispatch} from "shared/lib/useAppDispatch/useAppDispatch";
 import {useEffect} from "react";
-import {getUserData, getUserIsInited, userActions} from "entities/User";
 import {AppRouter} from "app/providers/AppRouter";
 import {Sidebar} from "widgets/Sidebar";
+import {getProfileData, getProfileIsInited, profileActions} from "entities/Profile";
 
 const App = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(userActions.initUserData())
+        dispatch(profileActions.initProfileData())
     }, [dispatch])
 
-    const isUserInitialized = useSelector(getUserIsInited)
-    const userData = useSelector(getUserData)
+    const isProfileInitialized = useSelector(getProfileIsInited)
+    const profileData = useSelector(getProfileData)
 
     return (
         <div className="wrapper">
             <div className="container">
-                {userData && <Sidebar/>}
-                {isUserInitialized && <AppRouter/>}
+                {profileData && <Sidebar/>}
+                {isProfileInitialized && <AppRouter/>}
             </div>
         </div>
     )

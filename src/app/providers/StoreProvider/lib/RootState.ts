@@ -1,9 +1,12 @@
 import {LoginState} from "features/Login";
-import {UserState} from "entities/User";
+import {ProfileState} from "entities/Profile";
+import {UserPageState} from "pages/UsersPage";
 
 export interface RootState {
-    user: UserState
+    profile: ProfileState
     login: LoginState
+
+    userPage: UserPageState
 }
 
 export interface ThunkConfig<T> {

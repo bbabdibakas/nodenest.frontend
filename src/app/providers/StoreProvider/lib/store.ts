@@ -1,12 +1,14 @@
 import {configureStore, ReducersMapObject} from "@reduxjs/toolkit"
 import {RootState} from "./RootState"
 import {loginReducer} from "features/Login";
-import {userReducer} from "entities/User";
+import {profileReducer} from "entities/Profile";
+import {userPageReducer} from "pages/UsersPage";
 
 export function createReduxStore(initialState?: RootState) {
     const rootReducers: ReducersMapObject<RootState> = {
-        user: userReducer,
+        profile: profileReducer,
         login: loginReducer,
+        userPage: userPageReducer
     }
 
     return configureStore({

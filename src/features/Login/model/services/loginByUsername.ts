@@ -3,11 +3,11 @@ import {loginActions} from '../slice/loginSlice';
 import {validateLoginForm} from './validateLoginForm';
 import {ThunkConfig} from 'app/providers/StoreProvider';
 import {getLoginForm} from '../selectors/getLoginForm';
-import {User, userActions} from "entities/User";
 import axios from "axios";
+import {Profile, profileActions} from "entities/Profile";
 
 export const loginByUsername = createAsyncThunk<
-    User,
+    Profile,
     undefined,
     ThunkConfig<string[]>
 >(
@@ -24,9 +24,13 @@ export const loginByUsername = createAsyncThunk<
         }
 
         try {
-            const response = await axios.post<User>('http://localhost:8080/api/v1/login', form)
+            const response = await axios.post<Profile>('http://localhost:8080/api/v1/login', form, {
+                headers: {
+                    'content-type': 'application/json',
+                }
+            })
 
-            dispatch(userActions.setUserData(response.data))
+            dispatch(profileActions.setProfileData(response.data))
 
             return response.data;
         } catch (e) {
