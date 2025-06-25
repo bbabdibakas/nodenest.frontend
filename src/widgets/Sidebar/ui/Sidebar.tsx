@@ -3,13 +3,18 @@ import * as styles from './Sidebar.module.scss'
 import {AppLink} from "shared/ui/AppLink/AppLink";
 import {AppButton} from "shared/ui/AppButton/AppButton";
 import {useAppDispatch} from "shared/lib/useAppDispatch/useAppDispatch";
-import {profileActions} from "entities/Profile";
+import {useNavigate} from "react-router";
+import {logout} from "entities/Profile";
 
 const Sidebar = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
-    const onLogout = () => {
-        dispatch(profileActions.removeProfileData());
+    const onLogout = async () => {
+        const result = await dispatch(logout())
+        if (result.meta.requestStatus === "fulfilled") {
+            navigate(routePath.auth)
+        }
     }
 
     return (

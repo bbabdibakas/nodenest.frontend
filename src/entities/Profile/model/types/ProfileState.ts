@@ -9,4 +9,5 @@ export interface Profile {
 export interface ProfileState {
     profileData?: Profile
     isInitialized: boolean
+    isLoading: boolean
 }

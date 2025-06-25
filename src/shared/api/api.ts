@@ -17,6 +17,7 @@ const getAccessToken = () => {
 
 export const api = axios.create({
     baseURL: __API__,
+    withCredentials: true,
     headers: {
         authorization: getAccessToken(),
         'content-type': 'application/json',
