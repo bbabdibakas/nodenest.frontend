@@ -1,6 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {ThunkConfig} from "app/providers/StoreProvider";
-import axios from "axios";
 import {User} from "entities/User";
 
 export const fetchUsers = createAsyncThunk<
@@ -9,14 +8,10 @@ export const fetchUsers = createAsyncThunk<
     ThunkConfig<string[]>
 >(
     'users/getUsers',
-    async (_, {rejectWithValue}) => {
+    async (_, {rejectWithValue, extra}) => {
 
         try {
-            const response = await axios.get<User[]>('http://localhost:8080/api/v1/users', {
-                headers: {
-                    'content-type': 'application/json',
-                }
-            })
+            const response = await extra.api.get<User[]>('/users')
 
             return response.data;
         } catch (e) {

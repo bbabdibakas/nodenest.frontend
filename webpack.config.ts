@@ -12,6 +12,8 @@ export default (env: IEnv) => {
     const mode = env.mode || "development"
     const isDev = mode === "development"
 
+    const apiUrl = 'http://localhost:8080/api/v1'
+
     const config: webpack.Configuration = {
         mode,
         entry: path.resolve(__dirname, 'src', 'index.tsx'),
@@ -64,6 +66,10 @@ export default (env: IEnv) => {
             new MiniCssExtractPlugin({
                 filename: '[name].[contenthash].css',
                 chunkFilename: '[id].[contenthash].css',
+            }),
+            new webpack.DefinePlugin({
+                __IS_DEV__: JSON.stringify(isDev),
+                __API__: JSON.stringify(apiUrl),
             })
         ],
         devtool: isDev ? 'inline-source-map' : undefined,

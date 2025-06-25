@@ -6,3 +6,6 @@ declare module '*.module.scss' {
     const classNames: IClassNames;
     export = classNames;
 }
+
+const __IS_DEV__: boolean
+const __API__: string

@@ -3,7 +3,6 @@ import {loginActions} from '../slice/loginSlice';
 import {validateLoginForm} from './validateLoginForm';
 import {ThunkConfig} from 'app/providers/StoreProvider';
 import {getLoginForm} from '../selectors/getLoginForm';
-import axios from "axios";
 import {Profile, profileActions} from "entities/Profile";
 
 export const loginByUsername = createAsyncThunk<
@@ -13,7 +12,7 @@ export const loginByUsername = createAsyncThunk<
 >(
     'auth/loginByUsername',
     async (_, thunkApi) => {
-        const {rejectWithValue, dispatch, getState} = thunkApi;
+        const {rejectWithValue, dispatch, getState, extra} = thunkApi;
 
         const form = getLoginForm(getState())
         const errors = validateLoginForm(form)
@@ -24,11 +23,7 @@ export const loginByUsername = createAsyncThunk<
         }
 
         try {
-            const response = await axios.post<Profile>('http://localhost:8080/api/v1/login', form, {
-                headers: {
-                    'content-type': 'application/json',
-                }
-            })
+            const response = await extra.api.post<Profile>('/auth/login', form)
 
             dispatch(profileActions.setProfileData(response.data))
 

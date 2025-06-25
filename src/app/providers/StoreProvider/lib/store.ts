@@ -1,8 +1,9 @@
 import {configureStore, ReducersMapObject} from "@reduxjs/toolkit"
-import {RootState} from "./RootState"
+import {RootState, ThunkExtraArg} from "./RootState"
 import {loginReducer} from "features/Login";
 import {profileReducer} from "entities/Profile";
 import {userPageReducer} from "pages/UsersPage";
+import {api} from "shared/api/api";
 
 export function createReduxStore(initialState?: RootState) {
     const rootReducers: ReducersMapObject<RootState> = {
@@ -11,10 +12,19 @@ export function createReduxStore(initialState?: RootState) {
         userPage: userPageReducer
     }
 
+    const extraArg: ThunkExtraArg = {
+        api: api,
+    };
+
     return configureStore({
         reducer: rootReducers,
-        devTools: true,
+        devTools: __IS_DEV__,
         preloadedState: initialState,
+        middleware: getDefaultMiddleware => getDefaultMiddleware({
+            thunk: {
+                extraArgument: extraArg,
+            }
+        })
     })
 }
 
