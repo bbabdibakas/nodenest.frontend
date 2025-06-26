@@ -1,7 +1,7 @@
 import {LoginState} from "features/Login";
 import {ProfileState} from "entities/Profile";
 import {UserPageState} from "pages/UsersPage";
-import AxiosInstance = Axios.AxiosInstance;
+import {AxiosInstance} from "axios";
 
 export interface RootState {
     profile: ProfileState

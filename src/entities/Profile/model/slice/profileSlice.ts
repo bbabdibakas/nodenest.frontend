@@ -1,11 +1,10 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Profile, ProfileState} from "../types/ProfileState";
-import {PROFILE_LOCALSTORAGE_KEY} from "shared/const/localstorage";
+import {PROFILE_LOCALSTORAGE_ACCESS_TOKEN, PROFILE_LOCALSTORAGE_USER_KEY} from "shared/const/localstorage";
 import {logout} from "../services/logout";
 
 const initialState: ProfileState = {
     isInitialized: false,
-    isLoading: false,
 }
 
 export const profileSlice = createSlice({
@@ -14,32 +13,25 @@ export const profileSlice = createSlice({
     reducers: {
         setProfileData: (state, action: PayloadAction<Profile>) => {
             state.profileData = action.payload;
-            localStorage.setItem(PROFILE_LOCALSTORAGE_KEY, JSON.stringify(state.profileData));
+            localStorage.setItem(PROFILE_LOCALSTORAGE_USER_KEY, JSON.stringify(action.payload.user));
+            localStorage.setItem(PROFILE_LOCALSTORAGE_ACCESS_TOKEN, JSON.stringify(action.payload.accessToken));
         },
         initProfileData: (state) => {
-            const profileData = localStorage.getItem(PROFILE_LOCALSTORAGE_KEY)
-            if (profileData) {
-                //@ts-expect-error fix later
-                state.profileData = profileData;
+            const user = localStorage.getItem(PROFILE_LOCALSTORAGE_USER_KEY)
+            const accessToken = localStorage.getItem(PROFILE_LOCALSTORAGE_ACCESS_TOKEN)
+
+            if (user && accessToken) {
+                state.profileData = {user: JSON.parse(user), accessToken: JSON.parse(accessToken)};
             }
             state.isInitialized = true;
         },
-        removeProfileData: (state) => {
-            state.profileData = undefined
-            localStorage.removeItem(PROFILE_LOCALSTORAGE_KEY)
-        }
     },
     extraReducers: (builder) => {
         builder
-            .addCase(logout.pending, (state) => {
-                state.isLoading = true
-            })
-            .addCase(logout.rejected, (state) => {
-                state.isLoading = false
-            })
             .addCase(logout.fulfilled, (state) => {
                 state.profileData = undefined;
-                state.isLoading = false
+                localStorage.removeItem(PROFILE_LOCALSTORAGE_USER_KEY)
+                localStorage.removeItem(PROFILE_LOCALSTORAGE_ACCESS_TOKEN)
             })
     }
 })

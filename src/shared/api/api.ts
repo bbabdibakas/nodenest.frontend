@@ -1,25 +1,23 @@
-import axios from 'axios';
-import {PROFILE_LOCALSTORAGE_KEY} from "shared/const/localstorage";
-
-//TODO: have to add httpOnly cookies
-const getAccessToken = () => {
-    const profileDataJSON = localStorage.getItem(PROFILE_LOCALSTORAGE_KEY);
-
-    if (profileDataJSON) {
-        // TODO: have to create type validator
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        const profileData = JSON.parse(profileDataJSON);
-        return profileData.accessToken ? `Bearer ${profileData.accessToken}` : '';
-    }
-
-    return ''
-}
+import axios, {InternalAxiosRequestConfig} from 'axios';
+import {PROFILE_LOCALSTORAGE_ACCESS_TOKEN} from "shared/const/localstorage";
 
 export const api = axios.create({
     baseURL: __API__,
     withCredentials: true,
     headers: {
-        authorization: getAccessToken(),
         'content-type': 'application/json',
+    }
+})
+
+api.interceptors.request.use(
+    (config: InternalAxiosRequestConfig) => {
+        const token = localStorage.getItem(PROFILE_LOCALSTORAGE_ACCESS_TOKEN)
+        if (token && config.headers) {
+            config.headers.Authorization = `Bearer ${token}`
+        }
+        return config
     },
-});
+    (error) => {
+        return Promise.reject(error);
+    }
+)
