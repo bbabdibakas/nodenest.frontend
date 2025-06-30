@@ -1,5 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {ThunkConfig} from 'app/providers/StoreProvider';
+import {profileActions} from "entities/Profile";
 
 export const logout = createAsyncThunk<
     boolean,
@@ -12,6 +13,8 @@ export const logout = createAsyncThunk<
 
         try {
             await extra.api.post('/auth/logout')
+
+            dispatch(profileActions.removeProfileData())
 
             return true
         } catch (e) {

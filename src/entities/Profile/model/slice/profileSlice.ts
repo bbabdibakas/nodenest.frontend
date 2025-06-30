@@ -1,7 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {Profile, ProfileState} from "../types/ProfileState";
 import {PROFILE_LOCALSTORAGE_ACCESS_TOKEN, PROFILE_LOCALSTORAGE_USER_KEY} from "shared/const/localstorage";
-import {logout} from "../services/logout";
 
 const initialState: ProfileState = {
     isInitialized: false,
@@ -25,14 +24,11 @@ export const profileSlice = createSlice({
             }
             state.isInitialized = true;
         },
-    },
-    extraReducers: (builder) => {
-        builder
-            .addCase(logout.fulfilled, (state) => {
-                state.profileData = undefined;
-                localStorage.removeItem(PROFILE_LOCALSTORAGE_USER_KEY)
-                localStorage.removeItem(PROFILE_LOCALSTORAGE_ACCESS_TOKEN)
-            })
+        removeProfileData: (state) => {
+            state.profileData = undefined
+            localStorage.removeItem(PROFILE_LOCALSTORAGE_USER_KEY)
+            localStorage.removeItem(PROFILE_LOCALSTORAGE_ACCESS_TOKEN)
+        }
     }
 })
 
