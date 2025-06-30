@@ -21,7 +21,7 @@ export function createReduxStore(initialState?: RootState) {
         api: api,
     };
 
-    const store =  configureStore({
+    const store = configureStore({
         reducer: rootReducers,
         devTools: __IS_DEV__,
         preloadedState: initialState,

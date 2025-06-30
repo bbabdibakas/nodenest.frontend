@@ -12,12 +12,14 @@ export const refreshToken = createAsyncThunk<
         const {rejectWithValue, dispatch, extra} = thunkApi;
 
         try {
-            const response = await extra.api.post<Profile>('/auth/refreshToken')
+            const response = await extra.api.post<Profile>('/auth/refresh')
 
             dispatch(profileActions.setProfileData(response.data))
 
             return response.data;
         } catch (e) {
+
+            dispatch(profileActions.removeProfileData())
             console.log(e)
             return rejectWithValue(['some server error']);
         }

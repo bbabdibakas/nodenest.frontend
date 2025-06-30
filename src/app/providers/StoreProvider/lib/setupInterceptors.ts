@@ -4,7 +4,7 @@ import {AxiosError, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfi
 import {PROFILE_LOCALSTORAGE_ACCESS_TOKEN} from "shared/const/localstorage";
 import {refreshToken} from "features/Refresh";
 
-export const setupInterceptors = (store: {dispatch: AppDispatch}) => {
+export const setupInterceptors = (store: { dispatch: AppDispatch }) => {
     api.interceptors.request.use(
         (config: InternalAxiosRequestConfig) => {
             const token = localStorage.getItem(PROFILE_LOCALSTORAGE_ACCESS_TOKEN)
@@ -45,6 +45,7 @@ export const setupInterceptors = (store: {dispatch: AppDispatch}) => {
                     return Promise.reject(refreshError);
                 }
             }
+
             return Promise.reject(error);
         }
     );
