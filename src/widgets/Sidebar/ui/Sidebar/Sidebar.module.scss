@@ -1,0 +1,13 @@
+.Sidebar {
+  min-width: 200px;
+  height: 100%;
+  padding: var(--border-padding);
+  border-right: 1px solid var(--border-color);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+}
+
+

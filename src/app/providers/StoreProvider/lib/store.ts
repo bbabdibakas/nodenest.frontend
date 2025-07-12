@@ -7,6 +7,7 @@ import {refreshReducer} from "features/Refresh";
 import {logoutReducer} from "features/Logout";
 import {userPageReducer} from "pages/UsersPage";
 import {setupInterceptors} from "./setupInterceptors";
+import {hostsPageReducer} from "pages/HostsPage";
 
 export function createReduxStore(initialState?: RootState) {
     const rootReducers: ReducersMapObject<RootState> = {
@@ -14,7 +15,8 @@ export function createReduxStore(initialState?: RootState) {
         login: loginReducer,
         refresh: refreshReducer,
         logout: logoutReducer,
-        userPage: userPageReducer
+        userPage: userPageReducer,
+        hostsPage: hostsPageReducer,
     }
 
     const extraArg: ThunkExtraArg = {

@@ -4,6 +4,7 @@ import {LoginState} from "features/Login";
 import {RefreshState} from "features/Refresh";
 import {LogoutState} from "features/Logout";
 import {UserPageState} from "pages/UsersPage";
+import {HostsPageState} from "pages/HostsPage";
 
 export interface RootState {
     profile: ProfileState
@@ -11,6 +12,7 @@ export interface RootState {
     refresh: RefreshState
     logout: LogoutState
     userPage: UserPageState
+    hostsPage: HostsPageState
 }
 
 export interface ThunkExtraArg {
