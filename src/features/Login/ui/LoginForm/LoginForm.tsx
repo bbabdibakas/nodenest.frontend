@@ -12,6 +12,7 @@ import {getLoginFormIsLoading} from "../../model/selectors/getLoginFormIsLoading
 import {useAppDispatch} from "shared/lib/useAppDispatch/useAppDispatch";
 import {routePath} from "app/providers/AppRouter";
 import {useNavigate} from "react-router";
+import AppLoader from "shared/ui/AppLoader/AppLoader";
 
 const LoginForm = () => {
     const dispatch = useAppDispatch();
@@ -40,7 +41,7 @@ const LoginForm = () => {
     if (isLoading) {
         return (
             <div className={styles.LoginForm}>
-                Loading...
+                <AppLoader/>
             </div>
         )
     } else {

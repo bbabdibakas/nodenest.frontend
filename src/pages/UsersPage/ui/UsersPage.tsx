@@ -5,6 +5,7 @@ import {getUserPageData} from "../model/selectors/getUserPageData";
 import {getUserPageIsLoading} from "../model/selectors/getUserPageIsLoading";
 import {getUserPageServerErrors} from "../model/selectors/getUserPageServerErrors";
 import {fetchUsers} from "../model/servers/fetchUsers";
+import {AppButton} from "shared/ui/AppButton/AppButton";
 
 const UsersPage = () => {
     const dispatch = useAppDispatch();
@@ -33,7 +34,10 @@ const UsersPage = () => {
     } else {
         content = (
             <div className="page">
-                {users.map((user, index)=>(
+                <AppButton>
+                    Create User
+                </AppButton>
+                {users.map((user, index) => (
                     <div key={index}>
                         {user.name}
                     </div>
