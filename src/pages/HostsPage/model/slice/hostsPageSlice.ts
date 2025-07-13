@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {getHosts} from "../services/getHosts";
-import {Host, HostsPageState} from "../types/HostsPageState";
+import {HostsPageState} from "../types/HostsPageState";
+import {Host} from "entities/Host";
 
 const initialState: HostsPageState = {
     hosts: [],

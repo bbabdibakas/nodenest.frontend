@@ -56,6 +56,7 @@ const LoginForm = () => {
                     hasError={validateErrors?.includes(ValidateLoginFormError.INCORRECT_USERNAME)}
                     onChange={onChangeUsername}/>
                 <AppInput
+                    type={'password'}
                     value={form.password}
                     placeholder={'Password'}
                     hasError={validateErrors?.includes(ValidateLoginFormError.INCORRECT_PASSWORD)}

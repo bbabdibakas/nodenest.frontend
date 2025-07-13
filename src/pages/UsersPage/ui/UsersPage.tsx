@@ -6,6 +6,7 @@ import {getUserPageIsLoading} from "../model/selectors/getUserPageIsLoading";
 import {getUserPageServerErrors} from "../model/selectors/getUserPageServerErrors";
 import {fetchUsers} from "../model/servers/fetchUsers";
 import {AppButton} from "shared/ui/AppButton/AppButton";
+import AppPageLoader from "shared/ui/AppPageLoader/AppPageLoader";
 
 const UsersPage = () => {
     const dispatch = useAppDispatch();
@@ -22,7 +23,7 @@ const UsersPage = () => {
     if (isLoading) {
         content = (
             <div className="page">
-                Loading...
+                <AppPageLoader/>
             </div>
         )
     } else if (serverErrors) {

@@ -5,6 +5,8 @@ import {getHostsPageData} from "../model/selectors/getHostsPageData";
 import {getHostsPageIsLoading} from "../model/selectors/getHostsPageIsLoading";
 import {getHostsPageServerErrors} from "../model/selectors/getHostsPageServerErrors";
 import {getHosts} from "../model/services/getHosts";
+import {HostCard} from "entities/Host";
+import AppPageLoader from "shared/ui/AppPageLoader/AppPageLoader";
 
 const HostsPage = () => {
     const dispatch = useAppDispatch();
@@ -21,7 +23,7 @@ const HostsPage = () => {
     if (isLoading) {
         content = (
             <div className="page">
-                Loading...
+                <AppPageLoader/>
             </div>
         )
     } else if (serverErrors) {
@@ -34,9 +36,7 @@ const HostsPage = () => {
         content = (
             <div className="page">
                 {hosts.map((host, index)=>(
-                    <div key={index}>
-                        {host.name}
-                    </div>
+                    <HostCard host={host} key={index}/>
                 ))}
             </div>
         )

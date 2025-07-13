@@ -1,0 +1,13 @@
+.HostCard {
+  display: flex;
+}
+
+.error {
+  color: red;
+}
+
+.name, .ip, .config, .updatedAt{
+  width: 200px;
+  font: var(--font-m);
+}
+

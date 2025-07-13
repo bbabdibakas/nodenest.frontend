@@ -1,9 +1,4 @@
-export interface Host {
-    id: string;
-    hostId: string;
-    name: string;
-    ip: string;
-}
+import {Host} from "entities/Host";
 
 export interface HostsPageState {
     hosts: Host[];

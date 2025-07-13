@@ -6,6 +6,7 @@ interface AppInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'val
     value: string
     placeholder: string
     hasError?: boolean
+    type?: 'text' | 'password'
     onChange: (value: string) => void
 }
 
@@ -17,6 +18,7 @@ export const AppInput = (props: AppInputProps) => {
         placeholder,
         hasError,
         maxLength = 32,
+        type = 'text',
         ...otherProps
     } = props
 
@@ -33,6 +35,7 @@ export const AppInput = (props: AppInputProps) => {
                 placeholder={placeholder}
                 maxLength={maxLength}
                 {...otherProps}
+                type={type}
             />
             <div className={styles.placeholder}>
                 {placeholder}

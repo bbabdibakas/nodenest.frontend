@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {ThunkConfig} from "app/providers/StoreProvider";
-import {Host} from "../types/HostsPageState";
+import {Host} from "entities/Host";
 
 export const getHosts = createAsyncThunk<
     Host[],
