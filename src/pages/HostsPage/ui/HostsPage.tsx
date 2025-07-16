@@ -7,6 +7,7 @@ import {getHostsPageServerErrors} from "../model/selectors/getHostsPageServerErr
 import {getHosts} from "../model/services/getHosts";
 import {HostCard} from "entities/Host";
 import AppPageLoader from "shared/ui/AppPageLoader/AppPageLoader";
+import {AppHeader} from "shared/ui/AppHeader/AppHeader";
 
 const HostsPage = () => {
     const dispatch = useAppDispatch();
@@ -35,6 +36,7 @@ const HostsPage = () => {
     } else {
         content = (
             <div className="page">
+                <AppHeader title={"Hosts"} />
                 {hosts.map((host, index)=>(
                     <HostCard host={host} key={index}/>
                 ))}

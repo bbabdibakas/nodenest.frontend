@@ -1,0 +1,28 @@
+.AppHeader {
+  display: flex;
+  align-items: center;
+  padding: var(--border-padding);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.button {
+  border-radius: 50%;
+
+  &:hover {
+    background: var(--border-color);
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.title {
+  margin-left: 16px;
+  font: var(--font-l);
+  font-weight: bold;
+}

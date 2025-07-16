@@ -1,13 +1,38 @@
 .HostCard {
+  cursor: pointer;
+  width: fit-content;
   display: flex;
+  align-items: center;
+  padding: var(--border-padding);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--border-padding);
+
+  &:hover {
+    background: var(--border-color);
+  }
+}
+
+.HostCard > *:not(:first-child):not(:last-child) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: var(--border-padding);
+  width: 150px;
+}
+
+.checkbox {
+  width: 24px;
+  height: 24px;
+  background: var(--app-bg-color);
+  border: 1px solid #242424;
+  border-radius: calc(var(--border-radius) - var(--border-padding));
 }
 
 .error {
   color: red;
 }
 
-.name, .ip, .config, .updatedAt{
-  width: 200px;
+.name, .ip, .config, .updatedAt {
   font: var(--font-m);
 }
 

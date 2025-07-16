@@ -4,8 +4,6 @@
   align-items: center;
   justify-content: center;
   font: var(--font-l);
-  background: var(--highlight-color);
-  border: 1px solid var(--highlight-color);
   padding: var(--border-padding);
   outline: none;
   border-radius: var(--border-radius);
@@ -14,4 +12,14 @@
   &:hover {
     opacity: 09;
   }
+}
+
+.primary {
+  background: var(--highlight-color);
+  border: 1px solid var(--highlight-color);
+}
+
+.clear {
+  background: var(--app-bg-color);
+  border: 1px solid var(--app-bg-color);
 }

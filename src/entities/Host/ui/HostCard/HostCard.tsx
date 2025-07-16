@@ -1,12 +1,11 @@
-import {Host} from "../../model/types/Host";
 import * as style from './HostCard.module.scss'
+import {Host} from "../../model/types/Host";
 
 interface HostCardProps {
     host: Host
 }
 
 export const HostCard = (props: HostCardProps) => {
-
     const {
         host
     } = props
@@ -30,6 +29,7 @@ export const HostCard = (props: HostCardProps) => {
     return (
         <div
             className={`${style.HostCard} ${host.wabaHealthStatusCode && host.wabaHealthStatusCode > 400 ? style.error : 'undefined'}`}>
+            <div className={style.checkbox}/>
             <div className={style.name}>
                 {host.name}
             </div>
