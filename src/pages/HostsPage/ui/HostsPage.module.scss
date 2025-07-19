@@ -1,0 +1,29 @@
+.buttons {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.button {
+  border-radius: 0;
+  &:hover {
+    border-color: var(--border-color);
+    background: var(--border-color);
+  }
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.active {
+  position: absolute;
+  top: 36px;
+  width:  100%;
+  height:  3px;
+  border-radius: 2px;
+  background: var(--highlight-color);
+}

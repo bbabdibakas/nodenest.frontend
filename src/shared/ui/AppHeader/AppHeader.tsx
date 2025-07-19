@@ -22,7 +22,6 @@ export const AppHeader = (props: AppHeaderProps) => {
             <AppButton theme={AppButtonTheme.CLEAR} className={styles.button} onClick={onBack}>
                 <div className={styles.icon}>
                     <TurnLeftIcon />
-
                 </div>
             </AppButton>
             <div className={styles.title}>

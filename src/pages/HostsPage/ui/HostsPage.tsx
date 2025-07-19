@@ -5,9 +5,14 @@ import {getHostsPageData} from "../model/selectors/getHostsPageData";
 import {getHostsPageIsLoading} from "../model/selectors/getHostsPageIsLoading";
 import {getHostsPageServerErrors} from "../model/selectors/getHostsPageServerErrors";
 import {getHosts} from "../model/services/getHosts";
-import {HostCard} from "entities/Host";
+import {HostList} from "entities/Host";
 import AppPageLoader from "shared/ui/AppPageLoader/AppPageLoader";
 import {AppHeader} from "shared/ui/AppHeader/AppHeader";
+import {AppButton, AppButtonTheme} from "shared/ui/AppButton/AppButton";
+import {useSearchParams} from "react-router";
+import * as styles from "./HostsPage.module.scss";
+
+const filters = ['all hosts', 'dialog360', 'telegram']
 
 const HostsPage = () => {
     const dispatch = useAppDispatch();
@@ -15,9 +20,17 @@ const HostsPage = () => {
     const isLoading = useSelector(getHostsPageIsLoading)
     const serverErrors = useSelector(getHostsPageServerErrors)
 
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const activeFilter = searchParams.get("filter") || "all hosts";
+
+    const toggleIsActive = (newFilter: string) => {
+        setSearchParams({filter: newFilter})
+    }
+
     useEffect(() => {
-        void dispatch(getHosts())
-    }, [dispatch])
+        void dispatch(getHosts(activeFilter))
+    }, [dispatch, activeFilter])
 
     let content
 
@@ -36,10 +49,27 @@ const HostsPage = () => {
     } else {
         content = (
             <div className="page">
-                <AppHeader title={"Hosts"} />
-                {hosts.map((host, index)=>(
-                    <HostCard host={host} key={index}/>
-                ))}
+                <AppHeader title={"Hosts"}/>
+                <div className={styles.buttons}>
+                    {
+                        filters.map((filter, index) => (
+                            <AppButton
+                                className={styles.button}
+                                theme={AppButtonTheme.CLEAR}
+                                onClick={() => toggleIsActive(filter)}
+                                key={index}
+                            >
+                                <div className={styles.title}>
+                                    <div>
+                                        {filter}
+                                    </div>
+                                    {filter === activeFilter ? <div className={styles.active}/> : null}
+                                </div>
+                            </AppButton>
+                        ))
+                    }
+                </div>
+                <HostList hosts={hosts}/>
             </div>
         )
     }

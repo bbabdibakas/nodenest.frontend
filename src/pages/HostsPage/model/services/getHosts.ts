@@ -4,14 +4,14 @@ import {Host} from "entities/Host";
 
 export const getHosts = createAsyncThunk<
     Host[],
-    undefined,
+    string,
     ThunkConfig<string[]>
 >(
     'hosts/getHosts',
-    async (_, {rejectWithValue, extra}) => {
+    async (filter, {rejectWithValue, extra}) => {
 
         try {
-            const response = await extra.api.get<Host[]>('/hosts')
+            const response = await extra.api.get<Host[]>(`/hosts?filter=${filter}`)
 
             return response.data;
         } catch (e) {
